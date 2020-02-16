@@ -47,7 +47,8 @@ class LikesSerializer(serializers.ModelSerializer):
         model = Likes
         fields = (
             'id',
-            'count'
+            'count',
+            'downvotes',
         )
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,4 +57,5 @@ class LikeSerializer(serializers.ModelSerializer):
             'id',
             'count',
             'upvotes',
+            'downvotes',
         )

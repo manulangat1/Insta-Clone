@@ -12,6 +12,7 @@ class Picture(BaseModel):
         return self.caption
 class Likes(BaseModel):
     count = models.PositiveIntegerField(default=0)
+    downvotes = models.IntegerField(default=0)
     upvotes = models.ManyToManyField(Picture,related_name='like')
 class Comment(BaseModel):
     text = models.TextField()
