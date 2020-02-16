@@ -1,6 +1,6 @@
 from .models import Picture,Comment
 
-from .serializers import PictureDetailsSerializer,PictureSerializer,CommentSerializer
+from .serializers import PictureDetailsSerializer,PictureSerializer,CommentsSerializer
 
 from rest_framework import generics
 
@@ -10,6 +10,6 @@ class PicturesAPI(generics.ListAPIView):
 class PictureAPI(generics.ListCreateAPIView):
     queryset = Picture.objects.all()
     serializer_class = PictureSerializer
-class CommentAPI(generics.ListAPIView):
+class CommentAPI(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    serializer_class = CommentsSerializer

@@ -7,12 +7,12 @@ class BaseModel(models.Model):
 class Picture(BaseModel):
     image = models.ImageField(upload_to='pics/')
     caption = models.CharField(max_length=25)
-
+    likes = models.IntegerField(default=0)
     def __str__(self):
         return self.caption
 class Comment(BaseModel):
     text = models.TextField()
-    picture = models.ForeignKey(Picture,on_delete=models.CASCADE,related_name='comments')
+    post = models.ForeignKey(Picture,on_delete=models.CASCADE,related_name='comments')
 
     def __str__(self):
         return self.text
