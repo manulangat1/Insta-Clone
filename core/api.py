@@ -13,6 +13,6 @@ class PictureAPI(generics.ListCreateAPIView):
 class CommentAPI(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentsSerializer
-class LikesAPI(generics.ListCreateAPIView):
+class LikesAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Likes.objects.all()
     serializer_class = LikeSerializer
