@@ -1,6 +1,6 @@
-from .models import Picture,Comment
+from .models import Picture,Comment,Likes
 
-from .serializers import PictureDetailsSerializer,PictureSerializer,CommentsSerializer
+from .serializers import PictureDetailsSerializer,PictureSerializer,CommentsSerializer,LikeSerializer
 
 from rest_framework import generics
 
@@ -13,3 +13,6 @@ class PictureAPI(generics.ListCreateAPIView):
 class CommentAPI(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentsSerializer
+class LikesAPI(generics.ListCreateAPIView):
+    queryset = Likes.objects.all()
+    serializer_class = LikeSerializer
