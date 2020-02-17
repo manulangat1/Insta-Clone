@@ -2,7 +2,9 @@ from . models import Profile,FriendRequest
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
-
+class StringSerializer(serializers.StringRelatedField):
+    def to_internal_value(self,value):
+        return value
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -12,6 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
             'email'
         )
 class ProfileSerializer(serializers.ModelSerializer):
+    user = StringSerializer()
     class Meta:
         model = Profile
         fields = (

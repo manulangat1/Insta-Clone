@@ -16,3 +16,6 @@ class CommentAPI(generics.ListCreateAPIView):
 class LikesAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Likes.objects.all()
     serializer_class = LikeSerializer
+class LikeAPI(generics.ListCreateAPIView):
+    queryset = Likes.objects.all()
+    serializer_class = LikeSerializer
