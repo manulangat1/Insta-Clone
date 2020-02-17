@@ -19,14 +19,6 @@ class UserListAPIView(generics.ListCreateAPIView):
 class UserProfileDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-# class ListUnseenFriendRequests(generics.ListCreateAPIView):
-#     serializer_class = FriendRequestSerializer
-#     # permission_classes = (IsAuthenticated,)
-
-#     def get_queryset(self):
-#         return FriendRequest.objects.all()
-#     def perform_create(self, serializer):
-#         return super().perform_create(serializer)
 class ListUnseenFriendRequests(APIView):
     serializer_class = FriendRequestSerializer
     def post(self, request, *args, **kwargs):
@@ -37,3 +29,30 @@ class ListUnseenFriendRequests(APIView):
             to_user = user
         )
         return Response({'status': 'Request sent'}, status=201)
+class DeleteFriendRequest(APIView):
+    serializer_class = FriendRequestSerializer
+    def post(self,request,*args,**kwargs):
+        user = User.objects.get(pk=request.data['to_user'])
+        print(user) 
+        frequest = FriendRequest.objects.filter(
+            from_user = request.user,
+            to_user = user
+        ).first()
+        frequest.delete()
+        print(frequest)
+        return Response({"deleted"})
+class AcceptFriendRequest(APIView):
+    serializer_class = FriendRequestSerializer
+    def post(self,request,*args,**kwargs):
+        user = User.objects.get(pk=request.data['from_user'])
+        users = User.objects.get(pk=request.data['to_user'])
+        frequest = FriendRequest.objects.filter(
+            from_user = user,
+            to_user = users
+        ).first()
+        print(users)
+        user.profile.friends.add(users.profile)
+        users.profile.friends.add(user.profile)
+        frequest.delete()
+        return Response({"deleted"})
+# class 

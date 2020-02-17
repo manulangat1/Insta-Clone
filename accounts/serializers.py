@@ -15,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
         )
 class ProfileSerializer(serializers.ModelSerializer):
     user = StringSerializer()
+    # friends = StringSerializer()
     class Meta:
         model = Profile
         fields = (
